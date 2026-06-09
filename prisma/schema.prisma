@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Form {
+  id          String       @id @default(uuid())
+  title       String
+  description String?
+  pixelId     String?      // Can store Facebook Pixel ID, Google Analytics ID, or custom script tags
+  fields      String       // JSON-serialized string of form elements/fields config
+  showBanner  Boolean      @default(false)
+  bannerText  String?
+  bannerLink  String?
+  bannerImage String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  submissions Submission[]
+}
+
+model Submission {
+  id        String   @id @default(uuid())
+  formId    String
+  form      Form     @relation(fields: [formId], references: [id], onDelete: Cascade)
+  data      String   // JSON-serialized string of the field key/value answers
+  progress  Float    @default(100.0) // Completion progress (e.g. 100 for finished, or less for partial tracking)
+  createdAt DateTime @default(now())
+}
+
+model Setting {
+  key   String @id
+  value String
+}
