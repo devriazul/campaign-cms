@@ -14,6 +14,7 @@ model Form {
   id          String       @id @default(uuid())
   title       String
   description String?
+  titleAlign  String?      @default("left")
   pixelId     String?      // Can store Facebook Pixel ID, Google Analytics ID, or custom script tags
   fields      String       // JSON-serialized string of form elements/fields config
   showBanner  Boolean      @default(false)

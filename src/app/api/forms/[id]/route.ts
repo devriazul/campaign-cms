@@ -43,7 +43,7 @@ export async function PUT(
   try {
     const { id } = await params;
     const body = await request.json();
-    const { title, description, fields, pixelId, showBanner, bannerText, bannerLink, bannerImage } = body;
+    const { title, description, titleAlign, fields, pixelId, showBanner, bannerText, bannerLink, bannerImage } = body;
 
     const existingForm = await prisma.form.findUnique({
       where: { id },
@@ -61,6 +61,7 @@ export async function PUT(
       data: {
         title: title !== undefined ? title : existingForm.title,
         description: description !== undefined ? description : existingForm.description,
+        titleAlign: titleAlign !== undefined ? titleAlign : existingForm.titleAlign,
         pixelId: pixelId !== undefined ? pixelId : existingForm.pixelId,
         fields: fields !== undefined ? JSON.stringify(fields) : existingForm.fields,
         showBanner: showBanner !== undefined ? showBanner : existingForm.showBanner,

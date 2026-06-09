@@ -40,17 +40,18 @@ export default async function PublicFormPage({ params }: FormPageProps) {
         <head dangerouslySetInnerHTML={{ __html: form.pixelId }} />
       )}
       
-      <main className="min-h-screen bg-gradient-to-tr from-slate-50 via-sky-50/50 to-indigo-50/50 text-slate-800 flex items-center justify-center p-3 sm:p-6 md:p-8 relative overflow-hidden">
-        {/* Subtle background light leaks */}
-        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-sky-400/15 blur-[130px] pointer-events-none animate-pulse duration-[8000ms]"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-violet-400/15 blur-[135px] pointer-events-none animate-pulse duration-[10000ms]"></div>
-        <div className="absolute top-[40%] left-[50%] -translate-x-1/2 w-[400px] h-[400px] rounded-full bg-indigo-400/5 blur-[150px] pointer-events-none"></div>
+      <main className="min-h-screen bg-[#f5f8fa] text-[#33475b] flex items-center justify-center p-4 sm:p-8 md:p-12 relative overflow-hidden">
+        {/* Subtle professional background decorative elements */}
+        <div className="absolute top-0 left-0 w-full h-[320px] bg-gradient-to-b from-[#2d3e50]/5 to-transparent pointer-events-none"></div>
+        <div className="absolute top-[20%] left-[-10%] w-[450px] h-[450px] rounded-full bg-[#ff7a59]/5 blur-[120px] pointer-events-none"></div>
+        <div className="absolute bottom-[10%] right-[-10%] w-[550px] h-[550px] rounded-full bg-[#2d3e50]/5 blur-[140px] pointer-events-none"></div>
         
-        <div className="w-full max-w-2xl bg-white/70 backdrop-blur-xl border border-slate-200/80 rounded-3xl overflow-hidden shadow-2xl shadow-slate-200/60 relative z-10 transition-all duration-300">
+        <div className="w-full max-w-2xl relative z-10 transition-all duration-300">
           <PublicFormRenderer 
             formId={form.id} 
             title={form.title} 
             description={form.description || ""} 
+            titleAlign={form.titleAlign || "left"}
             fields={fields}
             showBanner={form.showBanner}
             bannerText={form.bannerText || ""}

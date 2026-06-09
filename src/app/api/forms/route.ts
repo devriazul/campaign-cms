@@ -17,6 +17,7 @@ export async function GET() {
       id: f.id,
       title: f.title,
       description: f.description,
+      titleAlign: f.titleAlign || "left",
       pixelId: f.pixelId,
       fields: JSON.parse(f.fields),
       showBanner: f.showBanner,
@@ -42,7 +43,7 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { title, description, fields, pixelId, showBanner, bannerText, bannerLink, bannerImage } = body;
+    const { title, description, titleAlign, fields, pixelId, showBanner, bannerText, bannerLink, bannerImage } = body;
 
     if (!title) {
       return NextResponse.json(
@@ -55,6 +56,7 @@ export async function POST(request: Request) {
       data: {
         title,
         description: description || "",
+        titleAlign: titleAlign || "left",
         pixelId: pixelId || "",
         fields: JSON.stringify(fields || []),
         showBanner: showBanner ?? false,
